@@ -41,3 +41,11 @@ npm run dev
 Dale click al recuadro y sube tu excel con los datos antes mencionados, espera el anuncio de Cargando y luego dale click al boton de "Mostrar todos los usuarios sospechosos"
 
 ## Construido con 🛠️
+ ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)  ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)   ![ReactJS](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+ ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)   ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) 
+
+
+ ## Deploy 📈 
+Aqui puedes probar la pagina desde una web ya creada
+![Demo](https://camiloprog-pruebaswetro.netlify.app/)
+
