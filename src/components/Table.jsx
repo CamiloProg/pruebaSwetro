@@ -75,7 +75,7 @@ const Table = () => {
         const distancia = parseFloat(carrera[indexDistance]);
         const pasos = parseFloat(carrera[indexSteps]);
 
-        const metrosPorPaso = 3;
+        const metrosPorPaso = 10;
         if (
           distancia > metrosPorPaso * pasos ||
           carrera[indexSpeed] > umbralVelocidad
@@ -85,7 +85,7 @@ const Table = () => {
             carrera[indexDuration] + " s",
             carrera[indexElevation] + " m",
             carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " km/m",
+            carrera[indexPace] + " m/km",
             carrera[indexSpeed] + " m/s",
             carrera[indexSteps] + " steps"
           );
@@ -106,29 +106,29 @@ const Table = () => {
           }
         }
 
-        if (carrera[indexElevation] > umbralElevacion) {
-          estadisticasSospechoso.push(
-            carrera[indexDistance] + " m",
-            carrera[indexDuration] + " s",
-            carrera[indexElevation] + " m",
-            carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " km/m",
-            carrera[indexSpeed] + " m/s",
-            carrera[indexSteps] + " steps",
-            `Elevación ganada anormalmente alta: ${carrera[indexElevation]} metros`
-          );
-        }
-
         if (carrera[indexHeartRate] > umbralFrecuenciaCardiaca) {
           estadisticasSospechoso.push(
             carrera[indexDistance] + " m",
             carrera[indexDuration] + " s",
             carrera[indexElevation] + " m",
             carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " km/m",
+            carrera[indexPace] + " m/km",
             carrera[indexSpeed] + " m/s",
             carrera[indexSteps] + " steps",
-            `Frecuencia cardíaca anormalmente alta: ${carrera[indexHeartRate]} bpm`
+            `Frecuencia cardíaca anormalmente alta o baja: ${carrera[indexHeartRate]} bpm`
+          );
+        }
+
+        if (carrera[indexElevation] > umbralElevacion) {
+          estadisticasSospechoso.push(
+            carrera[indexDistance] + " m",
+            carrera[indexDuration] + " s",
+            carrera[indexElevation] + " m",
+            carrera[indexHeartRate] + " bpm",
+            carrera[indexPace] + " m/km",
+            carrera[indexSpeed] + " m/s",
+            carrera[indexSteps] + " steps",
+            `Elevación ganada anormalmente alta: ${carrera[indexElevation]} metros`
           );
         }
 

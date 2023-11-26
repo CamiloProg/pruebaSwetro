@@ -1,5 +1,5 @@
 // vite.config.js
-import React from 'react';
+
 import react from '@vitejs/plugin-react';
 
 export default {
