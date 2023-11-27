@@ -14,8 +14,11 @@ Pagina web donde puedes subir tu documento excel teniendo en cuanta que cuentas 
 
 Y podras ver si hay algun sospechoso de trampas de acuerdo a estadisticas como:
 -Si tiene una velocidad promedio muy alta (Mayor a 10 m/s)
+
 -Si la distancia en metros y los pasos totales no concuerdan (La distancia de cada es mayor a 10 metros)
+
 -La frecuencia cardiaca (Si sobrepasa mas de 200 bpm)
+
 -Si la elevacion es muy exagerada (Mas de 30km en elevacion)
 
 ## Comenzando 🚀
