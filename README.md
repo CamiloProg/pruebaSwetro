@@ -28,7 +28,8 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 ### Instalación 🔧
 
 _Clona este repositorio en tu maquina local_
-_En tu terminal escribe:_
+
+_Luego en tu terminal escribe:_
 
 ```
 git clone https://github.com/CamiloProg/pruebaSwetro.git
