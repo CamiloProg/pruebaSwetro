@@ -13,6 +13,7 @@ Pagina web donde puedes subir tu documento excel teniendo en cuanta que cuentas 
 -AverageHeartRateInBeatsPerMinute
 
 Y podras ver si hay algun sospechoso de trampas de acuerdo a estadisticas como:
+
 -Si tiene una velocidad promedio muy alta (Mayor a 10 m/s)
 
 -Si la distancia en metros y los pasos totales no concuerdan (La distancia de cada es mayor a 10 metros)
@@ -27,9 +28,9 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 ### Instalación 🔧
 
 _Clona este repositorio en tu maquina local_
+_En tu terminal escribe:_
 
 ```
-En tu terminal escribe:
 git clone https://github.com/CamiloProg/pruebaSwetro.git
 ```
 _Instala las dependencias necesarias_
