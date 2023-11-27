@@ -47,5 +47,4 @@ Dale click al recuadro y sube tu excel con los datos antes mencionados, espera e
 
  ## Deploy 📈 
 Aqui puedes probar la pagina desde una web ya creada
-![Demo](https://camiloprog-pruebaswetro.netlify.app/)
-
+[Demo](https://camiloprog-pruebaswetro.netlify.app/)
