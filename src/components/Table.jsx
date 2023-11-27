@@ -36,122 +36,117 @@ const Table = () => {
   const displayData = () => {
     if (jsonData) {
       console.log(jsonData);
-      detectarTramposos(jsonData);
+      whoIsCheater(jsonData);
     }
   };
 
   // Función para detectar tramposos
-  function detectarTramposos(datos) {
-    const umbralVelocidad = 10; // m/s
-    const umbralElevacion = 30000; // metros
-    const umbralFrecuenciaCardiaca = 200; // bpm
+  function whoIsCheater(datos) {
+    const maxSpeed = 10; // m/s
+    const maxElevation = 30000; // metros
+    const maxHeartRate = 200; // bpm
 
-    const encabezados = datos[0];
+    const data = datos[0];
 
-    const indexUserId = encabezados.indexOf("UserId");
-    const indexDuration = encabezados.indexOf("DurationInSeconds");
-    const indexDistance = encabezados.indexOf("DistanceInMeters");
-    const indexSpeed = encabezados.indexOf("AverageSpeedInMetersPerSecond");
-    const indexPace = encabezados.indexOf("AveragePaceInMinutesPerKilometer");
-    const indexElevation = encabezados.indexOf("TotalElevationGainInMeters");
-    const indexSteps = encabezados.indexOf("Steps");
-    const indexHeartRate = encabezados.indexOf(
-      "AverageHeartRateInBeatsPerMinute"
-    );
+    const indexUserId = data.indexOf("UserId");
+    const indexDuration = data.indexOf("DurationInSeconds");
+    const indexDistance = data.indexOf("DistanceInMeters");
+    const indexSpeed = data.indexOf("AverageSpeedInMetersPerSecond");
+    const indexPace = data.indexOf("AveragePaceInMinutesPerKilometer");
+    const indexElevation = data.indexOf("TotalElevationGainInMeters");
+    const indexSteps = data.indexOf("Steps");
+    const indexHeartRate = data.indexOf("AverageHeartRateInBeatsPerMinute");
 
-    const datosUsuarios = _.groupBy(datos.slice(1), (row) => row[indexUserId]);
+    const userDatas = _.groupBy(datos.slice(1), (row) => row[indexUserId]);
 
-    // Almacena información sobre los sospechosos
-    const sospechosos = [];
+    // Almacena información sobre los Suspects
+    const Suspects = [];
 
     // Verifica cada usuario
-    for (const userId in datosUsuarios) {
-      const datosUsuario = datosUsuarios[userId];
+    for (const userId in userDatas) {
+      const userData = userDatas[userId];
 
-      for (const carrera of datosUsuario) {
-        // Almacena estadísticas del sospechoso
-        const estadisticasSospechoso = [];
+      for (const raceID of userData) {
+        // Almacena estadísticas del Suspects
+        const suspectStatistics = [];
 
-        const distancia = parseFloat(carrera[indexDistance]);
-        const pasos = parseFloat(carrera[indexSteps]);
+        const distance = parseFloat(raceID[indexDistance]);
+        const steps = parseFloat(raceID[indexSteps]);
 
-        const metrosPorPaso = 10;
-        if (
-          distancia > metrosPorPaso * pasos ||
-          carrera[indexSpeed] > umbralVelocidad
-        ) {
-          estadisticasSospechoso.push(
-            carrera[indexDistance] + " m",
-            carrera[indexDuration] + " s",
-            carrera[indexElevation] + " m",
-            carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " m/km",
-            carrera[indexSpeed] + " m/s",
-            carrera[indexSteps] + " steps"
+        const metersPerStep = 10;
+        if (distance > metersPerStep * steps || raceID[indexSpeed] > maxSpeed) {
+          suspectStatistics.push(
+            raceID[indexDistance] + " m",
+            raceID[indexDuration] + " s",
+            raceID[indexElevation] + " m",
+            raceID[indexHeartRate] + " bpm",
+            raceID[indexPace] + " m/km",
+            raceID[indexSpeed] + " m/s",
+            raceID[indexSteps] + " steps"
           );
 
           if (
-            distancia > metrosPorPaso * pasos &&
-            carrera[indexSpeed] > umbralVelocidad
+            distance > metersPerStep * steps &&
+            raceID[indexSpeed] > maxSpeed
           ) {
-            estadisticasSospechoso.push(
+            suspectStatistics.push(
               `Velocidad alta y Relación anormal entre pasos y distancia`
             );
-          } else if (distancia > metrosPorPaso * pasos) {
-            estadisticasSospechoso.push(
+          } else if (distance > metersPerStep * steps) {
+            suspectStatistics.push(
               `Relación anormal entre la distancia y los pasos`
             );
-          } else if (carrera[indexSpeed] > umbralVelocidad) {
-            estadisticasSospechoso.push(`Velocidad demasiado alta`);
+          } else if (raceID[indexSpeed] > maxSpeed) {
+            suspectStatistics.push(`Velocidad demasiado alta`);
           }
         }
 
-        if (carrera[indexHeartRate] > umbralFrecuenciaCardiaca) {
-          estadisticasSospechoso.push(
-            carrera[indexDistance] + " m",
-            carrera[indexDuration] + " s",
-            carrera[indexElevation] + " m",
-            carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " m/km",
-            carrera[indexSpeed] + " m/s",
-            carrera[indexSteps] + " steps",
-            `Frecuencia cardíaca anormalmente alta o baja: ${carrera[indexHeartRate]} bpm`
+        if (raceID[indexHeartRate] > maxHeartRate) {
+          suspectStatistics.push(
+            raceID[indexDistance] + " m",
+            raceID[indexDuration] + " s",
+            raceID[indexElevation] + " m",
+            raceID[indexHeartRate] + " bpm",
+            raceID[indexPace] + " m/km",
+            raceID[indexSpeed] + " m/s",
+            raceID[indexSteps] + " steps",
+            `Frecuencia cardíaca anormalmente alta o baja: ${raceID[indexHeartRate]} bpm`
           );
         }
 
-        if (carrera[indexElevation] > umbralElevacion) {
-          estadisticasSospechoso.push(
-            carrera[indexDistance] + " m",
-            carrera[indexDuration] + " s",
-            carrera[indexElevation] + " m",
-            carrera[indexHeartRate] + " bpm",
-            carrera[indexPace] + " m/km",
-            carrera[indexSpeed] + " m/s",
-            carrera[indexSteps] + " steps",
-            `Elevación ganada anormalmente alta: ${carrera[indexElevation]} metros`
+        if (raceID[indexElevation] > maxElevation) {
+          suspectStatistics.push(
+            raceID[indexDistance] + " m",
+            raceID[indexDuration] + " s",
+            raceID[indexElevation] + " m",
+            raceID[indexHeartRate] + " bpm",
+            raceID[indexPace] + " m/km",
+            raceID[indexSpeed] + " m/s",
+            raceID[indexSteps] + " steps",
+            `Elevación ganada anormalmente alta: ${raceID[indexElevation]} metros`
           );
         }
 
         // Almacena información del sospechoso en el arreglo
-        if (estadisticasSospechoso.length > 0) {
-          sospechosos.push({
+        if (suspectStatistics.length > 0) {
+          Suspects.push({
             userId,
-            carreraId: carrera[0],
-            estadisticas: estadisticasSospechoso,
+            raceID: raceID[0],
+            statistics: suspectStatistics,
           });
         }
       }
     }
 
-    // Actualiza el estado con la información de los sospechosos
-    setSuspectUsers(sospechosos);
+    // Actualiza el estado con la información de los Suspects
+    setSuspectUsers(Suspects);
   }
 
   return (
     <div className='container'>
       {suspectUsers.length > 0 && (
         <div>
-          <h2>Usuarios Sospechosos y Estadísticas</h2>
+          <h2>Usuarios Suspects y Estadísticas</h2>
 
           <table>
             <thead>
@@ -169,11 +164,11 @@ const Table = () => {
               </tr>
             </thead>
             <tbody>
-              {suspectUsers.map((sospechoso, index) => (
+              {suspectUsers.map((Suspects, index) => (
                 <tr key={index}>
-                  <td>{sospechoso.userId}</td>
-                  <td>{sospechoso.carreraId}</td>
-                  {sospechoso.estadisticas.map((estadistica, i) => (
+                  <td>{Suspects.userId}</td>
+                  <td>{Suspects.raceID}</td>
+                  {Suspects.statistics.map((estadistica, i) => (
                     <td
                       key={i}
                       className={
@@ -184,12 +179,12 @@ const Table = () => {
                           : i === 2 && parseFloat(estadistica) > 30000
                           ? "suspect-speed"
                           : i === 6 &&
-                            sospechoso.estadisticas[7].includes(
+                            Suspects.statistics[7].includes(
                               "Velocidad alta y Relación anormal entre pasos y distancia"
                             )
                           ? "suspect-speed"
                           : i === 6 &&
-                            sospechoso.estadisticas[7].includes(
+                            Suspects.statistics[7].includes(
                               "Relación anormal entre la distancia y los pasos"
                             )
                           ? "suspect-speed"
@@ -213,7 +208,7 @@ const Table = () => {
       {loading && <p>Cargando...</p>}
       {fileLoaded && (
         <button onClick={displayData}>
-          Mostrar Todos los usuarios sospechosos
+          Mostrar Todos los usuarios Suspects
         </button>
       )}
     </div>
