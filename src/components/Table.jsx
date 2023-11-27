@@ -59,7 +59,7 @@ const Table = () => {
 
     const userDatas = _.groupBy(datos.slice(1), (row) => row[indexUserId]);
 
-    // Almacena información sobre los Suspects
+    // Almacena información sobre los sospechosos
     const Suspects = [];
 
     // Verifica cada usuario
@@ -67,7 +67,7 @@ const Table = () => {
       const userData = userDatas[userId];
 
       for (const raceID of userData) {
-        // Almacena estadísticas del Suspects
+        // Almacena estadísticas del sospechoso
         const suspectStatistics = [];
 
         const distance = parseFloat(raceID[indexDistance]);
@@ -138,7 +138,7 @@ const Table = () => {
       }
     }
 
-    // Actualiza el estado con la información de los Suspects
+    // Actualiza el estado con la información de los sospechosos
     setSuspectUsers(Suspects);
   }
 
@@ -208,7 +208,7 @@ const Table = () => {
       {loading && <p>Cargando...</p>}
       {fileLoaded && (
         <button onClick={displayData}>
-          Mostrar Todos los usuarios Suspects
+          Mostrar Todos los usuarios sospechosos
         </button>
       )}
     </div>
